@@ -20,7 +20,7 @@ class Sheet
   end
 end
 
-def run(srcdir,dstdir)
+def run(srcdir,dstdir,w,h)
   name = File.basename(srcdir)
   prefix = File.dirname(srcdir) + "/"
 
@@ -44,10 +44,10 @@ def run(srcdir,dstdir)
     puts "#{sprite.name}, #{sprite.path}, #{sprite.h}x#{sprite.w}"
     sprite
   }.sort{|a,b|
-    a.h <=> b.h
+    b.h <=> a.h
   }
 
-  sheet = Sheet.new(4096,4096)
+  sheet = Sheet.new(w,h)
   sheets = [sheet]
   x=0
   y=0
@@ -61,7 +61,7 @@ def run(srcdir,dstdir)
 
     if sheet.h < y+sprite.h
       puts "new sheet"
-      sheet = Sheet.new(4096,4096)
+      sheet = Sheet.new(w,h)
       sheets << sheet
       x=0
       y=0
@@ -98,10 +98,12 @@ end
 
 # ----
 
-if ARGV.size < 2
-  puts "usage: sheeter path/to/images/directory path/to/output/directory"
+if ARGV.size < 3
+  puts "usage: sheeter path/to/images/directory path/to/output/directory width height"
   exit
 end
 srcdir = ARGV[0]
 outdir = ARGV[1]
-run srcdir, outdir
+w = ARGV[2].to_i
+h = ARGV[3].to_i
+run srcdir, outdir, w,h
