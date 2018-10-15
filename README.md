@@ -10,7 +10,7 @@ exec: `./build/bin/sheeter path/to/source/dir path/to/output/dir size`
 sprites-0.png, sprites.json and sprites.msgpack files are created via command as:
 `./build/bin/sheeter doc/sprites/ doc/ 512 512`
 
-![sample-0.png](doc/sample-0.png)
+![sprites-0.png](doc/sprites-0.png)
 
 ```
 {
